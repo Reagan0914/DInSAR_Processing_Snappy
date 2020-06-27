@@ -56,8 +56,8 @@ def EnhancedSpectralDiversity_config():
     parameters.put("overallAzimuthShift",0.0)
     return parameters
 
-def Intergerogram_config():
-    parameters = HashMap()  
+def Interferogram_config():
+    parameters = HashMap()
     parameters.put("Subtract flat-earth phase", True)
     parameters.put("Degree of \"Flat Earth\" polynomial", 5)
     parameters.put("Number of \"Flat Earth\" estimation points", 501)
@@ -173,5 +173,3 @@ def SliceAssembly_config():
     parameters = HashMap()
     parameters.put('selectedPolarizations', 'VV')
     return  parameters
-
-
