@@ -147,3 +147,9 @@ def CreateStack(inFiles):
     CreateStack_Out = GPF.createProduct('CreateStack', parameters, inFiles)
     logger.info("Finished Process: Create Stack")
     return CreateStack_Out
+
+def BandMaths(inFile, BandName, Expression):
+    parameters = sc.BandMaths_config(BandName, Expression)
+    BandMaths_Out = GPF.createProduct('BandMaths', parameters, inFile)
+    print("Finished Process: Masking using BandMaths")
+    return BandMaths_Out
