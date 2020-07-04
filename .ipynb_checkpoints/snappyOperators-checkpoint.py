@@ -53,7 +53,7 @@ def EnhancedSpectralDiversity(inFile):
     logger.info("Finished Process: Enhanced Spectral Diversity")
     return EnhancedSpectralDiversity_Out
 
-def Interferogram(inFile`):
+def Interferogram(inFile):
     parameters = sc.Interferogram_config()
     Interferogram_Out = GPF.createProduct('Interferogram', parameters, inFile)
     logger.info("Finished Process: Interferogram")
@@ -73,7 +73,7 @@ def TopoPhaseRemoval(inFile):
 
 def Multilook(inFile):
     parameters = sc.Multilook_config()
-    Multilook_Out = GPF.createProduct('Multilook`', parameters, inFile)
+    Multilook_Out = GPF.createProduct('Multilook', parameters, inFile)
     logger.info("Finished Process: Multilook")
     return Multilook_Out
 
@@ -153,3 +153,14 @@ def BandMaths(inFile, BandName, Expression):
     BandMaths_Out = GPF.createProduct('BandMaths', parameters, inFile)
     print("Finished Process: Masking using BandMaths")
     return BandMaths_Out
+
+def SliceAssembly(inFiles):
+    parameters = sc.SliceAssembly_config()
+    SliceAssembly_Out = GPF.createProduct("SliceAssembly", parameters, inFiles)
+    print("Finished Process: Slice Assembly")
+    return SliceAssembly_Out
+
+def RadiometricCalibration(inFile):
+    parameters = sc.RadiometricCalibration_config()
+    RadiometricCalibration_Out = GPF.createProduct('Calibration', parameters, inFile)
+    return RadiometricCalibration_Out

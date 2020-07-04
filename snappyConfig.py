@@ -6,6 +6,23 @@ Any changes made here will affect the processing output.
 
 from snappy import HashMap
 from snappy import jpy
+from snappy import WKTReader
+import shapefile
+import pygeoif
+
+shp_file_path = "E:\Sentinel 1 SAR Processing\Sentinel_Mosaic\Data\Spatial Data\NPL_adm0.shp"
+shp_file = shapefile.Reader(shp_file_path)
+
+g = []
+
+for s in shp_file.shapes():
+    g.append(pygeoif.geometry.as_shape(s))
+
+m = pygeoif.MultiPoint(g)
+
+wkt = str(m.wkt).replace("MULTIPOINT", "POLYGON(") + ")"
+
+geometry = WKTReader().read(wkt)
 
 SRTM1SEC = "SRTM 1Sec HGT"
 
@@ -148,6 +165,17 @@ def TerrainCorrection_config(projection):
     parameters.put("incidenceAngleForSigma0", "Use projected local incidence angle from DEM")
     parameters.put("incidenceAngleForGamma0", "Use projected local incidence angle from DEM")
     parameters.put("auxFile", "Latest Auxiliary File")
+    return parameters
+
+def RadiometricCalibration_config():
+    parameters = HashMap()
+    parameters.put('outputSigmaBand', True)
+    return parameters
+
+def Subset_config():
+    parameters = HashMap()
+    parameters.put("copyMetadata", True)
+    parameters.put("GeoRegion", geometry)
     return parameters
 
 def CreateStack_config():
